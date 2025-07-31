@@ -296,6 +296,10 @@ class cvvdp(vq_metric):
 
             if self.do_heatmap:
                 self.heatmap_pyr = lpyr_dec_2(width, height, self.pix_per_deg, self.device)
+                self.heatmap_pyr_ch = [
+                    lpyr_dec_2(width, height, self.pix_per_deg, self.device)
+                    for _ in range(3)]   # Y-sust, RG, YV
+                heatmap_ch_blocks    = []
 
         #assert self.W == R_vid.shape[-1] and self.H == R_vid.shape[-2]
         #assert len(R_vid.shape)==5
@@ -433,6 +437,10 @@ class cvvdp(vq_metric):
             if self.do_heatmap:
                 if self.heatmap == "raw":
                     heatmap[:,:,ff:ff_end,...] = heatmap_block.detach().type(torch.float16).cpu()
+                    ch_maps = torch.cat(           # (all_ch ,1 ,F_block ,H ,W)
+                        [hpch.reconstruct().detach().type(torch.float16).cpu()
+                         for hpch in self.heatmap_pyr_ch], dim=0)
+                    heatmap_ch_blocks.append(ch_maps)   # list -> cat later
                 else:
                     ref_frame = R[:,0, :, :, :]
                     heatmap[:,:,ff:ff_end,...] = visualize_diff_map(heatmap_block, context_image=ref_frame, colormap_type=self.heatmap, use_cpu=self.device.type == 'mps').detach().type(torch.float16).cpu()
@@ -465,6 +473,9 @@ class cvvdp(vq_metric):
 
         if self.do_heatmap:            
             stats['heatmap'] = heatmap
+            # add per-channel heatmap
+            if heatmap_ch_blocks:
+                stats['heatmap_ch'] = torch.cat(heatmap_ch_blocks, dim=2)  # (4,F,H,W)
 
         if self.debug: 
             logging.debug( f"Processing {block_N_frames} frames in a batch." )
@@ -651,6 +662,9 @@ class cvvdp(vq_metric):
 
                 D_chr = self.lp_norm(D*per_ch_w, self.beta_tch, dim=-4, normalize=False)  # Sum across temporal and chromatic channels
                 self.heatmap_pyr.set_lband(bb, D_chr)
+                # add per-channel heatmap
+                for cc in range(all_ch):
+                    self.heatmap_pyr_ch[cc].set_lband(bb, D[cc:cc+1, ...])
 
             if self.dump_channels:
                 width = R.shape[-1]

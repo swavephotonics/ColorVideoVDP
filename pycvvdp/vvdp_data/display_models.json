@@ -1,5 +1,15 @@
 
 {
+  "swave_onyx": {
+    "name": "Swave Onyx", 
+    "resolution": [1700, 1360], 
+    "diagonal_size_inches": 58.2165,
+    "viewing_distance_meters": 2,
+    "max_luminance": 2000, 
+    "min_luminance": 1,   
+    "E_ambient": 150, 
+    "source": "none"},
+
   "standard_4k": {
     "name": "30-inch 4K monitor, peak luminance 200 cd/m^2, viewed under office light levels (250 lux), seen from 2 x display height", 
     "resolution": [3840, 2160], 
