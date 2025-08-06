@@ -4,11 +4,46 @@
     "name": "Swave Onyx", 
     "resolution": [1700, 1360], 
     "diagonal_size_inches": 58.2165,
-    "viewing_distance_meters": 2,
+    "viewing_distance_meters": 0.65,
     "max_luminance": 2000, 
-    "min_luminance": 1,   
+    "min_luminance": 0.1,   
     "E_ambient": 150, 
-    "source": "none"},
+    "colorspace": "sRGB-AR",
+    "source": "none"
+  },
+
+  "swave_monitor": {
+    "name": "Swave Monitor", 
+    "resolution": [1700, 1360], 
+    "diagonal_size_inches": 58.2165,
+    "viewing_distance_meters": 0.65,
+    "max_luminance": 300, 
+    "min_luminance": 0.3,   
+    "E_ambient": 150, 
+    "colorspace": "sRGB-linear",
+    "source": "none"
+  },
+
+  "swave_test": { 
+    "name": "Swave test", 
+    "resolution": [1700, 1360], 
+    "viewing_distance_meters": 0.65,  
+    "diagonal_size_inches": 58.2165,   
+    "max_luminance": 300,   
+    "min_luminance": 0.3, 
+    "E_ambient": 150
+  },
+
+  "macbook_pro_16": { 
+    "name": "MacBook Pro 16", 
+    "resolution": [3072, 1920], 
+    "viewing_distance_inches":  25,  
+    "diagonal_size_inches": 16,   
+    "max_luminance": 500,   
+    "min_luminance": 0.37, 
+    "E_ambient": 250,   
+    "source": "https://www.apple.com/macbook-pro-16/specs/"
+  },
 
   "standard_4k": {
     "name": "30-inch 4K monitor, peak luminance 200 cd/m^2, viewed under office light levels (250 lux), seen from 2 x display height", 
@@ -200,17 +235,6 @@
     "min_luminance": 0.37, 
     "E_ambient": 250,   
     "source": "https://www.apple.com/ipad-pro/specs/"
-  },
-
-  "macbook_pro_16": { 
-    "name": "MacBook Pro 16", 
-    "resolution": [3072, 1920], 
-    "viewing_distance_inches":  25,  
-    "diagonal_size_inches": 16,   
-    "max_luminance": 500,   
-    "min_luminance": 0.37, 
-    "E_ambient": 250,   
-    "source": "https://www.apple.com/macbook-pro-16/specs/"
   },
 
   "lg_oled_2017_sdr": { 

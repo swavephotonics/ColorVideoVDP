@@ -343,6 +343,10 @@ class vvdp_display_photo_eotf(vvdp_display_photometry):
                 L = (self.Y_peak-Y_black)*srgb2lin(V) + Y_black + Y_refl
             else:
                 L = (self.Y_peak-Y_black)*(srgb2lin(V)*self.exposure).clip(0., 1.) + Y_black + Y_refl
+        elif self.EOTF == 'AR':
+            L = (self.Y_peak-Y_black)*V + Y_black + self.E_ambient
+        elif self.EOTF == 'linear2':
+            L = (self.Y_peak-Y_black)*V + Y_black + Y_refl
         elif self.EOTF=='PQ':
             L = (pq2lin( V )*self.exposure).clip(0.005, self.Y_peak) + Y_black + Y_refl #TODO: soft clipping
         elif self.EOTF=='linear':
