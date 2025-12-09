@@ -14,11 +14,11 @@
 
   "swave_monitor": {
     "name": "Swave Monitor", 
-    "resolution": [1920, 1080], 
+    "resolution": [3440, 1440], 
     "viewing_distance_meters":  0.6,  
-    "diagonal_size_inches": 24,   
-    "max_luminance": 200,   
-    "contrast": 1000,
+    "diagonal_size_inches": 34,   
+    "max_luminance": 300,   
+    "contrast": 3000,
     "E_ambient": 250,
     "colorspace": "sRGB-linear",
     "source": "none"
